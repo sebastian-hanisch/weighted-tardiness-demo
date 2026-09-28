@@ -215,7 +215,7 @@ st.markdown("---")
 # --- Experimente ------------------------------------------------------------------------------------------------------------------------
 
 st.subheader("🔬 Wie oft trifft ATC das echte Optimum?")
-if st.button(f"CP-SAT über n = 2 bis {C.EXACT_MAX_N} berechnen (dauert etwa 20 Sekunden)", key="opt_start"):
+if st.button(f"CP-SAT über n = 2 bis {C.EXACT_MAX_N} berechnen (dauert typisch 20-30 Sekunden)", key="opt_start"):
     st.session_state["opt_on"] = True
 if st.session_state.get("opt_on"):
     rows_opt = _optimality()
@@ -225,7 +225,7 @@ if st.session_state.get("opt_on"):
 st.markdown("---")
 
 st.subheader("🔬 Wie teuer ist eine exakte Lösung wirklich?")
-if st.button(f"Rechenzeit für n = 2 bis {C.EXACT_MAX_N} messen (dauert etwa 10 Sekunden)", key="timing_start"):
+if st.button(f"Rechenzeit für n = 2 bis {C.EXACT_MAX_N} messen (dauert typisch 10-15 Sekunden)", key="timing_start"):
     st.session_state["timing_on"] = True
 if st.session_state.get("timing_on"):
     rows_t = _timing()
@@ -236,7 +236,7 @@ if st.session_state.get("timing_on"):
 st.markdown("---")
 
 st.subheader("🔬 Werkstatt/Logistik: bleibt ATC gut, wenn Rüstzeiten dazukommen?")
-if st.button("Rüstzeit von 0 bis 60 Minuten durchfahren (dauert etwa 15 Sekunden)", key="setup_start"):
+if st.button("Rüstzeit von 0 bis 60 Minuten durchfahren (dauert typisch 15-25 Sekunden)", key="setup_start"):
     st.session_state["setup_on"] = True
 if st.session_state.get("setup_on"):
     rows_s = _setup_gap_sweep(min(int(n_jobs), C.EXACT_MAX_N), int(n_families))

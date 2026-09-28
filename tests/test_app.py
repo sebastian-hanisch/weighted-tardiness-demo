@@ -85,9 +85,14 @@ def test_step_two_has_the_eingeplant_slider_defaulting_to_all_jobs():
 
 
 def test_exact_limit_is_respected_in_the_metric():
+    """Bei n = EXACT_MAX_N kann CP-SAT entweder beweisen (Label 'CP-SAT (exakte Gegenprobe)') oder - auf
+    langsamerer Hardware - das Zeitlimit erreichen (Label 'CP-SAT', Wert 'Zeitlimit erreicht'); beides ist ein
+    gültiger, in app.py behandelter Zustand, kein Fehler."""
     at = _run(n_slider=C.EXACT_MAX_N)
     _ok(at)
-    assert _metric(at, "CP-SAT (exakte Gegenprobe)") in ("trifft ATC exakt", "ATC weicht ab")
+    proven_metric = next((m for m in at.metric if m.label == "CP-SAT (exakte Gegenprobe)"), None)
+    timeout_metric = next((m for m in at.metric if m.label == "CP-SAT" and m.value == "Zeitlimit erreicht"), None)
+    assert (proven_metric is not None and proven_metric.value in ("trifft ATC exakt", "ATC weicht ab")) or timeout_metric is not None
     at2 = _run(n_slider=C.EXACT_MAX_N + 1)
     _ok(at2)
     assert "erst ab n" in _metric(at2, "CP-SAT")

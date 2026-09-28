@@ -21,7 +21,7 @@ WEIGHT_PROBS = (0.5, 0.3, 0.2)
 # bei Stück 1-4 nicht durch n! (Brute-Force), sondern durch die starke NP-Schwere selbst gesetzt.
 EXACT_MAX_N = 9
 EXACT_SWEEP_N = (2, 3, 4, 5, 6, 7, 8, 9)
-EXACT_TIME_LIMIT_SECONDS = 10.0
+EXACT_TIME_LIMIT_SECONDS = 15.0  # Sicherheitsmarge für langsamere/kernärmere Maschinen (z. B. CI-Runner)
 
 # --- Vehikel B "Werkstatt/Logistik" ---------------------------------------------------------------------------
 N_FAMILIES_MIN, N_FAMILIES_MAX, DEFAULT_N_FAMILIES = 2, 6, 3

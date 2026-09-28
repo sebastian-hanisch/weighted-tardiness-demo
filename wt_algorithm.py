@@ -14,10 +14,14 @@ Drei Bausteine:
    kollabiert es exakt zum rüstzeitfreien Fall, kein zweites Modell nötig."""
 
 import math
+import os
 from dataclasses import dataclass
 
 import numpy as np
 from ortools.sat.python import cp_model
+
+NUM_SEARCH_WORKERS = min(8, os.cpu_count() or 1)  # mehr Worker als Kerne bremst CP-SAT eher (Oversubscription) -
+# genau das schlug auf einem 4-Kern-CI-Runner mit einem hart auf 8 gesetzten Wert fehl (Timeout statt Beweis)
 
 ATC_K = 0.9  # Look-ahead-Parameter (Vepsalainen & Morton 1987 empfehlen 0.5-4.5; 0.9 gegen das eigene
 # Instanz-Schema (TF/RDD) über n=3..9 gegen CP-SAT gerastert, siehe README/Messreihe - dasselbe Vorgehen wie
@@ -159,7 +163,7 @@ def solve_exact(p, d, w, family=None, setup=None, time_limit_seconds=10.0):
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = time_limit_seconds
-    solver.parameters.num_search_workers = 8
+    solver.parameters.num_search_workers = NUM_SEARCH_WORKERS
     status = solver.Solve(m)
     if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
         return None, False
