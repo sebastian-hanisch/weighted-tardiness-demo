@@ -1,6 +1,6 @@
 # ATC – wenn keine einfache Regel mehr beweisbar optimal ist – Streamlit-Demo
 
-**[→ Demo live ausprobieren](#) (Deploy offen)**
+**[→ Demo live ausprobieren](https://sebastianhanisch-weighted-tardiness-demo.streamlit.app/)**
 
 Fünftes Stück der **Klassische-Scheduling-Theorie-Linie** der "Konzepte"-Reihe für die Website "Sebastian Hanisch
 – Operations Research und Machine Learning": $n$ Aufträge mit Bearbeitungszeit $p_j$, Fälligkeit $d_j$ und Gewicht
